@@ -4,7 +4,7 @@ import (
 
 	//"context"
 	stdContext "context"
-
+"fmt"
 	"github.com/rhernandez-itemsoft/helpers/ilicense"
 	"github.com/rhernandez-itemsoft/helpers/iresponse"
 	"github.com/rhernandez-itemsoft/isystem/api/controllers/securityctrl"
@@ -41,7 +41,7 @@ func main() {
 					"en-US": "./resources/languages/en-US.ini",
 					"es-MX": "./resources/languages/es-MX.ini",
 				},
-			}
+			},
 		)
 
 		//Establece los handlers para el manejo de errores y para el manejo de traducciones
