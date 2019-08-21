@@ -3,7 +3,7 @@ package rolesctrl
 import (
 	"github.com/rhernandez-itemsoft/helpers/iresponse"
 
-	configstt "itemsoftmx/isystem/config/structs"
+	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
 
 	"github.com/go-xorm/xorm"
 	"github.com/kataras/iris"

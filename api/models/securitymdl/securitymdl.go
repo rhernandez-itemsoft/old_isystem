@@ -1,7 +1,7 @@
 package securitymdl
 
 import (
-	"itemsoftmx/isystem/api/structs/users"
+	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
 
 	"github.com/go-xorm/xorm"
 )

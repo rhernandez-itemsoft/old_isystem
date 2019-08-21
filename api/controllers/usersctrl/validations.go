@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/kataras/iris/middleware/i18n"
 	"github.com/rhernandez-itemsoft/helpers/icommon"
-	"itemsoftmx/isystem/api/structs/users"
+	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
 )
 
 //ValidarDatosCreate valida datos para poder crear un usuario

@@ -1,7 +1,7 @@
 package securityctrl
 
 import (
-	"itemsoftmx/isystem/api/structs/users"
+	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
 
 	"github.com/kataras/iris/middleware/i18n"
 	"github.com/rhernandez-itemsoft/helpers/icommon"

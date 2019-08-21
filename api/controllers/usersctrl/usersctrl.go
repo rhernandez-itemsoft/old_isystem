@@ -4,9 +4,9 @@ import (
 	"github.com/rhernandez-itemsoft/helpers/irequest"
 	"github.com/rhernandez-itemsoft/helpers/iresponse"
 	"github.com/rhernandez-itemsoft/helpers/isecurity"
-	"itemsoftmx/isystem/api/models/usermdl"
-	"itemsoftmx/isystem/api/structs/users"
-	configstt "itemsoftmx/isystem/config/structs"
+	"github.com/rhernandez-itemsoft/isystem/api/models/usermdl"
+	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
+	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
 
 	"github.com/go-xorm/xorm"
 	"github.com/kataras/iris"

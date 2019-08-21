@@ -7,9 +7,9 @@ import (
 
 	"github.com/rhernandez-itemsoft/helpers/ilicense"
 	"github.com/rhernandez-itemsoft/helpers/iresponse"
-	"itemsoftmx/isystem/api/controllers/securityctrl"
-	"itemsoftmx/isystem/api/controllers/usersctrl"
-	"itemsoftmx/isystem/config"
+	"github.com/rhernandez-itemsoft/isystem/api/controllers/securityctrl"
+	"github.com/rhernandez-itemsoft/isystem/api/controllers/usersctrl"
+	"github.com/rhernandez-itemsoft/isystem/config"
 	"log"
 	"time"
 	"github.com/kataras/iris/middleware/i18n"
