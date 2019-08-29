@@ -1,9 +1,9 @@
 package loggers
 
-//LoggerSignInStt registra el acceso (login de un usuario)
+//LoggerSignIn registra el acceso (login de un usuario)
 type LoggerSignIn struct {
 	Time   string
 	Email  string
-	UserID int
+	UserID int64
 	IP     string
 }

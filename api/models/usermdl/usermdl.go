@@ -24,8 +24,16 @@ func New(db *xorm.Engine) Definition {
 // Para la paginación
 // skip int64 = Indicia el registro apartir del que comenzará a contar la consulta
 // limit int64 = Indicia el máximo número de registros que retornará la consutla
-func (def *Definition) GetAll(start int, limit int, result interface{}) error {
-	return def.DB.Table("users").Limit(limit, start).Find(result)
+func (def *Definition) GetAll(start int, limit int, result interface{}) (int64, error) {
+	err := def.DB.Table("users").
+		Select("id, firstname, lastname, mlastname, email, username,  status_id").
+		//.Where("name = ?", name)
+		Limit(limit, start).
+		Find(result)
+
+	counts, err := def.DB.Table("users").Count()
+
+	return counts, err
 }
 
 //GetByID obtiene la lista de usuarios

@@ -18,9 +18,34 @@ func New(db *xorm.Engine) Definition {
 	}
 }
 
+//GetRole busca en la BD username/email y password
+func (def *Definition) GetRole(userID interface{}, result interface{}) error {
+	/*
+		exists, err := def.DB.Table("users").
+			Select("users.id, firstname, lastname, mlastname, email, username,  users.status_id, roles.id role_id, roles.role, roles.description").
+			Join("INNER", "user_roles", "user_roles.user_id = users.id").
+			Join("INNER", "roles", "roles.id = user_roles.role_id").
+			Where("email = ? and password = ?", params.Email, params.Password).Get(result)
+	*/
+	return def.DB.Table("roles").
+		Join("INNER", "user_roles", "user_roles.role_id = roles.id").
+		Select("roles.id, roles.role, roles.description").
+		Where("user_roles.user_id = ?", userID).Find(result)
+
+}
+
 //SignIn busca en la BD username/email y password
 func (def *Definition) SignIn(params *users.SignIn, result interface{}) (bool, error) {
-	exists, err := def.DB.Table("users").Where("email = ? and password = ?", params.Email, params.Password).Get(result)
+	/*
+		exists, err := def.DB.Table("users").
+			Select("users.id, firstname, lastname, mlastname, email, username,  users.status_id, roles.id role_id, roles.role, roles.description").
+			Join("INNER", "user_roles", "user_roles.user_id = users.id").
+			Join("INNER", "roles", "roles.id = user_roles.role_id").
+			Where("email = ? and password = ?", params.Email, params.Password).Get(result)
+	*/
+	exists, err := def.DB.Table("users").
+		Select("id, firstname, lastname, mlastname, email, username,  status_id").
+		Where("email = ? and password = ?", params.Email, params.Password).Get(result)
 	return exists, err
 }
 

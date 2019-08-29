@@ -1,7 +1,6 @@
 package usersctrl
 
 import (
-	"fmt"
 	"github.com/kataras/iris/middleware/i18n"
 	"github.com/rhernandez-itemsoft/helpers/icommon"
 	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
@@ -67,11 +66,12 @@ func (def *Definition) ValidarDatosUpdate(params *users.User, id *uint64) []stri
 	if icommon.IsPassword(params.Password) {
 		errs = append(errs, i18n.Translate(def.Ctx, "missing_password"))
 	}
-	fmt.Println(params.RoleID, params.RoleID < 1)
+	/*fmt.Println(params.RoleID, params.RoleID < 1)
 	fmt.Println(params.StatusID)
 	if params.RoleID < 1 {
 		errs = append(errs, i18n.Translate(def.Ctx, "missing_role"))
 	}
+	*/
 	if params.StatusID < 1 {
 		errs = append(errs, i18n.Translate(def.Ctx, "missing_status"))
 	}

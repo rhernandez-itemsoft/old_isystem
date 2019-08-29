@@ -1,16 +1,19 @@
 package usersctrl
 
 import (
-	"github.com/rhernandez-itemsoft/helpers/irequest"
-	"github.com/rhernandez-itemsoft/helpers/iresponse"
-	"github.com/rhernandez-itemsoft/helpers/isecurity"
-	"github.com/rhernandez-itemsoft/isystem/api/models/usermdl"
-	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
-	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
+	"fmt"
 
 	"github.com/go-xorm/xorm"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
+	"github.com/rhernandez-itemsoft/helpers/irequest"
+	"github.com/rhernandez-itemsoft/helpers/iresponse"
+	iresponsestt "github.com/rhernandez-itemsoft/helpers/iresponse/structs"
+	"github.com/rhernandez-itemsoft/helpers/isecurity"
+	"github.com/rhernandez-itemsoft/isystem/api/models/securitymdl"
+	"github.com/rhernandez-itemsoft/isystem/api/models/usermdl"
+	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
+	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
 )
 
 //response respuesta http de la api
@@ -18,6 +21,7 @@ import (
 var _response iresponse.Definition
 var _usermdl usermdl.Definition
 var _isec isecurity.Definition
+var _securitymdl securitymdl.Definition
 
 //Definition Permite definir los objetos que serán injectados en este controlador
 type Definition struct {
@@ -34,6 +38,7 @@ func (def *Definition) init() {
 	_response = iresponse.New(def.Ctx, def.DB)
 	_usermdl = usermdl.New(def.DB)
 	_isec = isecurity.New(def.Ctx, def.DB)
+	_securitymdl = securitymdl.New(def.DB)
 }
 
 // BeforeActivation se ejecuta despues de init() y aquí es donde podemos definir las rutas
@@ -42,7 +47,7 @@ func (def *Definition) BeforeActivation(b mvc.BeforeActivation) {
 	def.init()
 	//USERS
 	b.Handle("GET", "/{id:uint64}", "GetByID", _isec.JWTMiddleware)
-	b.Handle("GET", "/{start:int}/{limit:int}", "GetAll", _isec.JWTMiddleware)
+	b.Handle("GET", "/{start:int}/{limit:int}", "GetAll")
 
 	b.Handle("POST", "/", "Create", _isec.JWTMiddleware)
 	b.Handle("PUT", "/{id:uint64}", "Update", _isec.JWTMiddleware)
@@ -56,9 +61,12 @@ func (def *Definition) BeforeActivation(b mvc.BeforeActivation) {
 // limit int64 = Máximo número de registros que retornará la consutla
 func (def *Definition) GetAll(start int, limit int) {
 	def.init()
+	var dataTable iresponsestt.IMatTable
 
 	result := []users.User{}
-	if errGerneric := _usermdl.GetAll(start, limit, &result); errGerneric != nil {
+	totalRows, errGerneric := _usermdl.GetAll(start, limit, &result)
+	if errGerneric != nil {
+		fmt.Println(errGerneric)
 		_response.JSON(iris.StatusInternalServerError, nil, "error")
 		return
 	}
@@ -68,7 +76,13 @@ func (def *Definition) GetAll(start int, limit int) {
 		return
 	}
 
-	_response.JSON(iris.StatusOK, result, "success")
+	for index := range result {
+		_securitymdl.GetRole(result[index].ID, &result[index].Roles)
+	}
+
+	dataTable.Total = totalRows
+	dataTable.Rows = result
+	_response.JSON(iris.StatusOK, dataTable, "success")
 	return
 }
 
@@ -106,7 +120,7 @@ func (def *Definition) Create() {
 	}
 
 	//establece los valores por default
-	params.RoleID = 1
+	//params.RoleID = 1
 	params.StatusID = 1
 
 	//valida los datos

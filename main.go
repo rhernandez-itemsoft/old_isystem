@@ -4,20 +4,22 @@ import (
 
 	//"context"
 	stdContext "context"
-"fmt"
+	"fmt"
+	"log"
+	"time"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-xorm/xorm"
+	"github.com/iris-contrib/middleware/cors"
+	"github.com/kataras/iris"
+	"github.com/kataras/iris/context"
+	"github.com/kataras/iris/middleware/i18n"
+	"github.com/kataras/iris/mvc"
 	"github.com/rhernandez-itemsoft/helpers/ilicense"
 	"github.com/rhernandez-itemsoft/helpers/iresponse"
 	"github.com/rhernandez-itemsoft/isystem/api/controllers/securityctrl"
 	"github.com/rhernandez-itemsoft/isystem/api/controllers/usersctrl"
 	"github.com/rhernandez-itemsoft/isystem/config"
-	"log"
-	"time"
-	"github.com/kataras/iris/middleware/i18n"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/go-xorm/xorm"
-	"github.com/kataras/iris"
-	"github.com/kataras/iris/context"
-	"github.com/kataras/iris/mvc"
 	"xorm.io/core"
 )
 
@@ -32,6 +34,19 @@ func main() {
 		//Crea una instancia de app con la configuración inicial
 		app := initialice()
 
+		opts := cors.Options{
+			AllowedOrigins: []string{"http://localhost:4200", "*"},
+			AllowedHeaders: []string{"Content-Type", "Authorization", "Access-Control-Allow-Origin",
+				"Origin", "X-Auth-Token", "X-Requested-With", "Accept",
+			},
+			AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+			ExposedHeaders: []string{"X-Header"},
+			MaxAge:         int((24 * time.Hour).Seconds()),
+			// Debug:          true,
+		}
+
+		app.Use(cors.New(opts))
+		app.AllowMethods(iris.MethodOptions)
 		////NewLanguageHandler incializa la configuración para manejar traducciones (i18n )
 		LanguageHandler = i18n.New(
 			i18n.Config{

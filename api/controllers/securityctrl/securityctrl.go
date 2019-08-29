@@ -1,6 +1,8 @@
 package securityctrl
 
 import (
+	"time"
+
 	"github.com/rhernandez-itemsoft/helpers/icommon"
 	"github.com/rhernandez-itemsoft/helpers/iemail"
 	iemailStr "github.com/rhernandez-itemsoft/helpers/iemail/structs"
@@ -14,7 +16,6 @@ import (
 	"github.com/rhernandez-itemsoft/isystem/api/structs/loggers"
 	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
 	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
-	"time"
 
 	"github.com/go-xorm/xorm"
 	"github.com/kataras/iris"
@@ -89,6 +90,12 @@ func (def *Definition) SignIn() {
 		return
 	}
 
+	errGerneric = _securitymdl.GetRole(tokenInfo.ID, &tokenInfo.Roles)
+	if errGerneric != nil {
+		_response.JSON(iris.StatusBadRequest, nil, errGerneric.Error())
+		return
+	}
+
 	//retorna el response con el Token firmado en el atributo "DATA"
 	token, err := _isec.NewToken(tokenInfo)
 	if err != nil {
@@ -124,7 +131,7 @@ func (def *Definition) SignUp() {
 	}
 
 	//establece los valores por default
-	params.RoleID = 1
+	//params.RoleID = 1
 	params.StatusID = 1
 
 	//valida los datos

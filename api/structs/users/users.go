@@ -10,8 +10,18 @@ type User struct {
 	Lastname  string `json:"lastname" xorm:"varchar(150) not null 'lastname'"`
 	Mlastname string `json:"mlastname" xorm:"varchar(150) not null 'mlastname'"`
 	Token     string `json:"token" xorm:"varchar(1024) not null 'token'"`
-	RoleID    int    `json:"role_id" xorm:"int not null 'role_id'"`
-	StatusID  int    `json:"status_id" xorm:"int not null 'status_id'"`
+	//RoleID    int    `json:"role_id" xorm:"int not null 'role_id'"`
+	StatusID int `json:"status_id" xorm:"int not null 'status_id'"`
+
+	//esto no aplica para la BD
+	Roles []RolesInfo `json:"roles"  xorm:"null 'roles'`
+}
+
+//RolesInfo asd
+type RolesInfo struct {
+	ID          int64  `json:"id" xorm:"int pk autoincr notnull 'id'"`
+	Role        string `json:"role" xorm:"varchar(150) not null unique 'role'"`
+	Description string `json:"description" xorm:"varchar(150) not null unique 'description'"`
 }
 
 //SignIn Estructura utilizada para capturar los parametros de logueo
