@@ -1,10 +1,10 @@
 package securityctrl
 
 import (
-	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
+	"isystem/api/structs/users"
 
 	"github.com/kataras/iris/middleware/i18n"
-	"github.com/rhernandez-itemsoft/helpers/icommon"
+	"isystem/helpers/icommon"
 
 	"github.com/kataras/iris"
 )

@@ -1,9 +1,9 @@
 package rolesctrl
 
 import (
-	"github.com/rhernandez-itemsoft/helpers/iresponse"
+	"isystem/helpers/iresponse"
 
-	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
+	configstt "isystem/config/structs"
 
 	"github.com/go-xorm/xorm"
 	"github.com/kataras/iris"

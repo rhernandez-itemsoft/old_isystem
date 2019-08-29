@@ -2,8 +2,8 @@ package usersctrl
 
 import (
 	"github.com/kataras/iris/middleware/i18n"
-	"github.com/rhernandez-itemsoft/helpers/icommon"
-	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
+	"isystem/helpers/icommon"
+	"isystem/api/structs/users"
 )
 
 //ValidarDatosCreate valida datos para poder crear un usuario

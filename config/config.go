@@ -1,7 +1,7 @@
 package config
 
 import (
-	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
+	configstt "isystem/config/structs"
 
 	"github.com/kataras/iris"
 )

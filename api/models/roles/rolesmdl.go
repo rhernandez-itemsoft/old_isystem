@@ -1,7 +1,7 @@
 package usermdl
 
 import (
-	"github.com/rhernandez-itemsoft/isystem/api/structs/userstt"
+	"isystem/api/structs/userstt"
 
 	"github.com/go-xorm/xorm"
 )

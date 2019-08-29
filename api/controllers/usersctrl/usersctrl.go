@@ -6,14 +6,14 @@ import (
 	"github.com/go-xorm/xorm"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
-	"github.com/rhernandez-itemsoft/helpers/irequest"
-	"github.com/rhernandez-itemsoft/helpers/iresponse"
-	iresponsestt "github.com/rhernandez-itemsoft/helpers/iresponse/structs"
-	"github.com/rhernandez-itemsoft/helpers/isecurity"
-	"github.com/rhernandez-itemsoft/isystem/api/models/securitymdl"
-	"github.com/rhernandez-itemsoft/isystem/api/models/usermdl"
-	"github.com/rhernandez-itemsoft/isystem/api/structs/users"
-	configstt "github.com/rhernandez-itemsoft/isystem/config/structs"
+	"isystem/helpers/irequest"
+	"isystem/helpers/iresponse"
+	iresponsestt "isystem/helpers/iresponse/structs"
+	"isystem/helpers/isecurity"
+	"isystem/api/models/securitymdl"
+	"isystem/api/models/usermdl"
+	"isystem/api/structs/users"
+	configstt "isystem/config/structs"
 )
 
 //response respuesta http de la api

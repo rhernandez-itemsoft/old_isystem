@@ -8,6 +8,13 @@ import (
 	"log"
 	"time"
 
+	"isystem/api/controllers/securityctrl"
+
+	"isystem/api/controllers/usersctrl"
+	"isystem/config"
+	"isystem/helpers/ilicense"
+	"isystem/helpers/iresponse"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 	"github.com/iris-contrib/middleware/cors"
@@ -15,11 +22,6 @@ import (
 	"github.com/kataras/iris/context"
 	"github.com/kataras/iris/middleware/i18n"
 	"github.com/kataras/iris/mvc"
-	"github.com/rhernandez-itemsoft/helpers/ilicense"
-	"github.com/rhernandez-itemsoft/helpers/iresponse"
-	"github.com/rhernandez-itemsoft/isystem/api/controllers/securityctrl"
-	"github.com/rhernandez-itemsoft/isystem/api/controllers/usersctrl"
-	"github.com/rhernandez-itemsoft/isystem/config"
 	"xorm.io/core"
 )
 
@@ -109,6 +111,7 @@ func main() {
 	} else {
 		ilicense.RegisterUID()
 	}
+
 }
 
 //Initialice Inicializa la configuración de la API
