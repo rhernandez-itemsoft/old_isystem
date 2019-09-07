@@ -81,6 +81,7 @@ func (def *Definition) SignIn() {
 
 	//trata de buscar en la BD el el usuario validando la contraseña
 	request.Password = _isec.EncriptSha256(request.Password)
+	//fmt.Println(request.Password)
 	exists, errGerneric := _securitymdl.SignIn(&request, &tokenInfo)
 
 	if errGerneric != nil {
